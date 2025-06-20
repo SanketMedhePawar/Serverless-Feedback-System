@@ -1,57 +1,46 @@
-📝 Project Overview
-This project demonstrates a serverless feedback system using AWS services.
+# 📝 Project Overview
+This project demonstrates a **serverless feedback system** using AWS services.  
 It allows users to send feedback via an API Gateway, which triggers an AWS Lambda function that:
 
-Validates and saves the data to DynamoDB,
+- ✅ Validates and saves the data to **DynamoDB**  
+- ✅ Publishes a notification to **SNS**, which sends an email alert  
 
-Publishes a notification to SNS, which sends an email alert.
+---
 
+## ☁️ AWS Services Used
+- **AWS Lambda** — Processes the request
+- **Amazon API Gateway** — Enables POST requests
+- **DynamoDB** — Persists the feedback
+- **Amazon SNS** — Notifies via email
+- **CloudWatch Logs** — Logs requests and errors
 
-☁️ AWS Services Used
-AWS Lambda — Processes the request.
+---
 
-Amazon API Gateway — Enables POST requests.
+## ⚡️ Setup Instructions
+1. Create a **DynamoDB Table** named `FeedbackTable`:
+   - Primary Key: `feedbackId` (String)
 
-DynamoDB — Persists the feedback.
+2. Create an **SNS Topic**:
+   - Name: `feedback-topic`
+   - Subscribe your email.
 
-Amazon SNS — Notifies via email.
+3. Create a **Lambda Function**:
+   - Name: `FeedbackCollectorFunction`
+   - Upload the code (`lambda_function.py`).
+   - Set environment variables and attach required IAM policies.
 
-CloudWatch Logs — Logs requests and errors.
+4. Set Up an **API Gateway Route**:
+   - Route: `POST /`
+   - Integrate it with the Lambda.
 
-⚡️ Setup Instructions
-Create a DynamoDB Table named FeedbackTable:
+---
 
-Primary Key: feedbackId (String)
+## 📋 Testing the Endpoint
+**Send a POST request:**
 
-Create an SNS Topic:
-
-Name: feedback-topic
-
-Subscribe your email.
-
-Create a Lambda Function:
-
-Name: FeedbackCollectorFunction
-
-Upload the code (lambda_function.py).
-
-Set environment and attach required IAM policies.
-
-Set Up an API Gateway Route:
-
-Route: POST /
-
-Integrate it with the Lambda.
-
-📋 Testing the Endpoint
-Send a POST request to the API:
-
-Request
-http
-Copy
-Edit
+**Request:**
+```
 POST https://<your-api-id>.execute-api.<region>.amazonaws.com/
-
 Content-Type: application/json
 
 {
@@ -59,12 +48,19 @@ Content-Type: application/json
   "email": "sanketmedhe311@gmail.com",
   "message": "This feedback system is awesome!"
 }
+```
 
-Response
-json
-Copy
-Edit
+**Response:**
+```json
 {
   "message": "Feedback received successfully!",
   "feedbackId": "<your-feedback-id>"
 }
+```
+
+---
+
+## 📸 Implementation Screenshots
+👉 [Click here to view screenshots (PDF)](https://github.com/SanketMedhePawar/Serverless-Feedback-System/blob/2c873699efa3b2ae1e7f97a9ce8fb7630dacdcd2/Serverless%20Feedback%20System%20screenshots.pdf)
+
+---
